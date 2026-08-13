@@ -1,5 +1,5 @@
 print("==============================")
-print("  PERSONAL EXPENSE TRACKER   ")
+print("   PERSONAL EXPENSE TRACKER   ")
 print("==============================")
 
 print("1. Add Expense")
