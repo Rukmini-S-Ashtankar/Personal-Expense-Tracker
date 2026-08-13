@@ -10,7 +10,18 @@ print("4. Exit")
 choice = input("Enter your choice: ")
 
 if choice == "1":
-    print("Add Expense selected")
+    category = input("Enter expense category: ")
+    amount = float(input("Enter expense amount: "))
+    description = input("Enter description: ")
+
+    expense = {
+        "category": category,
+        "amount": amount,
+        "description": description
+    }
+
+    print("Expense added successfully!")
+    print("Expense:", expense)
 elif choice == "2":
     print("View Expenses selected")
 elif choice == "3":
