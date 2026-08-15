@@ -1,3 +1,5 @@
+expenses = []
+
 print("==============================")
 print("   PERSONAL EXPENSE TRACKER   ")
 print("==============================")
@@ -20,10 +22,24 @@ if choice == "1":
         "description": description
     }
 
+    expenses.append(expense)
+
     print("Expense added successfully!")
     print("Expense:", expense)
+
 elif choice == "2":
-    print("View Expenses selected")
+    if expenses:
+        print("\nYour Expenses:")
+
+        for expense in expenses:
+            print(
+                f"Category: {expense['category']}, "
+                f"Amount: ₹{expense['amount']}, "
+                f"Description: {expense['description']}"
+            )
+    else:
+        print("No expenses recorded.")
+
 elif choice == "3":
     print("Calculate Total selected")
 elif choice == "4":
