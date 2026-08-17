@@ -42,7 +42,12 @@ while True:
             print("No expenses recorded.")
 
     elif choice == "3":
-        print("Calculate Total selected")
+    total = 0
+
+    for expense in expenses:
+        total += expense["amount"]
+        
+        print(f"Total Expenses: ₹{total}")
 
     elif choice == "4":
         print("Goodbye!")
