@@ -9,6 +9,7 @@ while True:
     print("2. View Expenses")
     print("3. Calculate Total")
     print("4. Exit")
+    print("5. Delete Expense")
 
     choice = input("Enter your choice: ")
 
@@ -42,16 +43,35 @@ while True:
             print("No expenses recorded.")
 
     elif choice == "3":
-    total = 0
+        total = 0
 
-    for expense in expenses:
-        total += expense["amount"]
-        
+        for expense in expenses:
+            total += expense["amount"]
+
         print(f"Total Expenses: ₹{total}")
 
     elif choice == "4":
         print("Goodbye!")
         break
+
+    elif choice == "5":
+        if expenses:
+            for i, expense in enumerate(expenses, start=1):
+                print(
+                    f"{i}. {expense['category']} - "
+                    f"₹{expense['amount']} - "
+                    f"{expense['description']}"
+                )
+
+            index = int(input("Enter expense number to delete: "))
+
+            if 1 <= index <= len(expenses):
+                deleted = expenses.pop(index - 1)
+                print(f"Deleted: {deleted['description']}")
+            else:
+                print("Invalid expense number.")
+        else:
+            print("No expenses to delete.")
 
     else:
         print("Invalid choice")
