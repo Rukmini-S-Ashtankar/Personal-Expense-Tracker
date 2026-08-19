@@ -10,6 +10,7 @@ while True:
     print("3. Calculate Total")
     print("4. Exit")
     print("5. Delete Expense")
+    print("6. Edit Expense")
 
     choice = input("Enter your choice: ")
 
@@ -27,15 +28,14 @@ while True:
         expenses.append(expense)
 
         print("Expense added successfully!")
-        print("Expense:", expense)
 
     elif choice == "2":
         if expenses:
             print("\nYour Expenses:")
 
-            for expense in expenses:
+            for i, expense in enumerate(expenses, start=1):
                 print(
-                    f"Category: {expense['category']}, "
+                    f"{i}. Category: {expense['category']}, "
                     f"Amount: ₹{expense['amount']}, "
                     f"Description: {expense['description']}"
                 )
@@ -72,6 +72,37 @@ while True:
                 print("Invalid expense number.")
         else:
             print("No expenses to delete.")
+
+    elif choice == "6":
+        if expenses:
+            for i, expense in enumerate(expenses, start=1):
+                print(
+                    f"{i}. {expense['category']} - "
+                    f"₹{expense['amount']} - "
+                    f"{expense['description']}"
+                )
+
+            index = int(input("Enter expense number to edit: "))
+
+            if 1 <= index <= len(expenses):
+                expenses[index - 1]["category"] = input(
+                    "Enter new category: "
+                )
+
+                expenses[index - 1]["amount"] = float(
+                    input("Enter new amount: ")
+                )
+
+                expenses[index - 1]["description"] = input(
+                    "Enter new description: "
+                )
+
+                print("Expense updated successfully!")
+
+            else:
+                print("Invalid expense number.")
+        else:
+            print("No expenses to edit.")
 
     else:
         print("Invalid choice")
