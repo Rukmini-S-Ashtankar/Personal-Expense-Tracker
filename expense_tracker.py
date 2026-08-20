@@ -16,7 +16,17 @@ while True:
 
     if choice == "1":
         category = input("Enter expense category: ")
-        amount = float(input("Enter expense amount: "))
+        while True:
+    try:
+        amount = float(input("Enter expense amount: ₹"))
+
+        if amount <= 0:
+            print("Amount must be greater than 0.")
+        else:
+            break
+
+    except ValueError:
+        print("Please enter a valid amount.")
         description = input("Enter description: ")
 
         expense = {
@@ -89,8 +99,18 @@ while True:
                     "Enter new category: "
                 )
 
-                expenses[index - 1]["amount"] = float(
-                    input("Enter new amount: ")
+                while True:
+    try:
+        amount = float(input("Enter new amount: ₹"))
+
+        if amount <= 0:
+            print("Amount must be greater than 0.")
+        else:
+            expenses[index - 1]["amount"] = amount
+            break
+
+    except ValueError:
+        print("Please enter a valid amount.")
                 )
 
                 expenses[index - 1]["description"] = input(
