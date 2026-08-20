@@ -29,10 +29,13 @@ while True:
         print("Please enter a valid amount.")
         description = input("Enter description: ")
 
+        date = input("Enter date (DD-MM-YYYY): ")
+
         expense = {
             "category": category,
             "amount": amount,
-            "description": description
+            "description": description,
+            "date": date
         }
 
         expenses.append(expense)
@@ -45,8 +48,9 @@ while True:
 
             for i, expense in enumerate(expenses, start=1):
                 print(
-                    f"{i}. Category: {expense['category']}, "
-                    f"Amount: ₹{expense['amount']}, "
+                    f"{i}. Date: {expense['date']}, "
+                    f"Category: {expense['category']}, " 
+                    f"Amount: ₹{expense['amount']}, " 
                     f"Description: {expense['description']}"
                 )
         else:
@@ -116,6 +120,11 @@ while True:
                 expenses[index - 1]["description"] = input(
                     "Enter new description: "
                 )
+
+                expenses[index - 1]["date"] = input(
+                    "Enter new date (DD-MM-YYYY): "
+                )
+
 
                 print("Expense updated successfully!")
 
