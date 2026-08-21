@@ -11,7 +11,8 @@ while True:
     print("4. Exit")
     print("5. Delete Expense")
     print("6. Edit Expense")
-
+    print("7. Category Summary")
+    
     choice = input("Enter your choice: ")
 
     if choice == "1":
@@ -135,3 +136,19 @@ while True:
 
     else:
         print("Invalid choice")
+
+elif choice == "7":
+    if expenses:
+        summary = {}
+
+        for expense in expenses:
+            category = expense["category"]
+            summary[category] = summary.get(category, 0) + expense["amount"]
+
+        print("\nCategory-wise Expenses:")
+
+        for category, total in summary.items():
+            print(f"{category}: ₹{total:.2f}")
+
+    else:
+        print("No expenses recorded.")
