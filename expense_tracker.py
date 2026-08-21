@@ -1,3 +1,4 @@
+import json
 expenses = []
 
 while True:
@@ -66,8 +67,12 @@ while True:
         print(f"Total Expenses: ₹{total}")
 
     elif choice == "4":
-        print("Goodbye!")
-        break
+    with open("expenses.json", "w") as file:
+        json.dump(expenses, file, indent=4)
+
+    print("Expenses saved successfully!")
+    print("Goodbye!")
+    break
 
     elif choice == "5":
         if expenses:
