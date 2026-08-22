@@ -1,5 +1,10 @@
 import json
-expenses = []
+
+try:
+    with open("expenses.json", "r") as file:
+        expenses = json.load(file)
+except FileNotFoundError:
+    expenses = []
 
 while True:
     print("==============================")
