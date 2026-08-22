@@ -20,24 +20,25 @@ while True:
     print("7. Category Summary")
     print("8. Search Expenses")
     print("9. Monthly Summary")
-    
+
     choice = input("Enter your choice: ")
 
     if choice == "1":
         category = input("Enter expense category: ")
+
         while True:
-    try:
-        amount = float(input("Enter expense amount: ₹"))
+            try:
+                amount = float(input("Enter expense amount: ₹"))
 
-        if amount <= 0:
-            print("Amount must be greater than 0.")
-        else:
-            break
+                if amount <= 0:
+                    print("Amount must be greater than 0.")
+                else:
+                    break
 
-    except ValueError:
-        print("Please enter a valid amount.")
+            except ValueError:
+                print("Please enter a valid amount.")
+
         description = input("Enter description: ")
-
         date = input("Enter date (DD-MM-YYYY): ")
 
         expense = {
@@ -58,8 +59,8 @@ while True:
             for i, expense in enumerate(expenses, start=1):
                 print(
                     f"{i}. Date: {expense['date']}, "
-                    f"Category: {expense['category']}, " 
-                    f"Amount: ₹{expense['amount']}, " 
+                    f"Category: {expense['category']}, "
+                    f"Amount: ₹{expense['amount']}, "
                     f"Description: {expense['description']}"
                 )
         else:
@@ -74,12 +75,12 @@ while True:
         print(f"Total Expenses: ₹{total}")
 
     elif choice == "4":
-    with open("expenses.json", "w") as file:
-        json.dump(expenses, file, indent=4)
+        with open("expenses.json", "w") as file:
+            json.dump(expenses, file, indent=4)
 
-    print("Expenses saved successfully!")
-    print("Goodbye!")
-    break
+        print("Expenses saved successfully!")
+        print("Goodbye!")
+        break
 
     elif choice == "5":
         if expenses:
@@ -117,18 +118,17 @@ while True:
                 )
 
                 while True:
-    try:
-        amount = float(input("Enter new amount: ₹"))
+                    try:
+                        amount = float(input("Enter new amount: ₹"))
 
-        if amount <= 0:
-            print("Amount must be greater than 0.")
-        else:
-            expenses[index - 1]["amount"] = amount
-            break
+                        if amount <= 0:
+                            print("Amount must be greater than 0.")
+                        else:
+                            expenses[index - 1]["amount"] = amount
+                            break
 
-    except ValueError:
-        print("Please enter a valid amount.")
-                )
+                    except ValueError:
+                        print("Please enter a valid amount.")
 
                 expenses[index - 1]["description"] = input(
                     "Enter new description: "
@@ -138,7 +138,6 @@ while True:
                     "Enter new date (DD-MM-YYYY): "
                 )
 
-
                 print("Expense updated successfully!")
 
             else:
@@ -146,49 +145,53 @@ while True:
         else:
             print("No expenses to edit.")
 
-    else:
-        print("Invalid choice")
+    elif choice == "7":
+        if expenses:
+            summary = {}
 
-elif choice == "7":
-    if expenses:
-        summary = {}
+            for expense in expenses:
+                category = expense["category"]
+                summary[category] = (
+                    summary.get(category, 0) + expense["amount"]
+                )
+
+            print("\nCategory-wise Expenses:")
+
+            for category, total in summary.items():
+                print(f"{category}: ₹{total:.2f}")
+        else:
+            print("No expenses recorded.")
+
+    elif choice == "8":
+        search = input("Enter category to search: ").lower()
+
+        found = False
 
         for expense in expenses:
-            category = expense["category"]
-            summary[category] = summary.get(category, 0) + expense["amount"]
+            if expense["category"].lower() == search:
+                print(
+                    f"Date: {expense['date']} | "
+                    f"Category: {expense['category']} | "
+                    f"Amount: ₹{expense['amount']} | "
+                    f"Description: {expense['description']}"
+                )
+                found = True
 
-        print("\nCategory-wise Expenses:")
+        if not found:
+            print("No expenses found.")
 
-        for category, total in summary.items():
-            print(f"{category}: ₹{total:.2f}")
+    elif choice == "9":
+        month = input("Enter month (MM): ")
 
-elif choice == "8":
-    search = input("Enter category to search: ").lower()
+        total = 0
 
-    found = False
+        for expense in expenses:
+            expense_month = expense["date"].split("-")[1]
 
-    for expense in expenses:
-        if expense["category"].lower() == search:
-            print(
-                f"Date: {expense['date']} | "
-                f"Category: {expense['category']} | "
-                f"Amount: ₹{expense['amount']} | "
-                f"Description: {expense['description']}"
-            )
-            found = True
+            if expense_month == month:
+                total += expense["amount"]
 
-elif choice == "9":
-    month = input("Enter month (MM): ")
-
-    total = 0
-
-    for expense in expenses:
-        expense_month = expense["date"].split("-")[1]
-
-        if expense_month == month:
-            total += expense["amount"]
-
-    print(f"Total expenses for month {month}: ₹{total:.2f}")
+        print(f"Total expenses for month {month}: ₹{total:.2f}")
 
     else:
-        print("No expenses recorded.")
+        print("Invalid choice")
