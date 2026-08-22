@@ -19,6 +19,7 @@ while True:
     print("6. Edit Expense")
     print("7. Category Summary")
     print("8. Search Expenses")
+    print("9. Monthly Summary")
     
     choice = input("Enter your choice: ")
 
@@ -176,8 +177,18 @@ elif choice == "8":
             )
             found = True
 
-    if not found:
-        print("No expenses found.")
+elif choice == "9":
+    month = input("Enter month (MM): ")
+
+    total = 0
+
+    for expense in expenses:
+        expense_month = expense["date"].split("-")[1]
+
+        if expense_month == month:
+            total += expense["amount"]
+
+    print(f"Total expenses for month {month}: ₹{total:.2f}")
 
     else:
         print("No expenses recorded.")
