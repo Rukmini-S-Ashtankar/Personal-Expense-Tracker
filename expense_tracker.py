@@ -18,6 +18,7 @@ while True:
     print("5. Delete Expense")
     print("6. Edit Expense")
     print("7. Category Summary")
+    print("8. Search Expenses")
     
     choice = input("Enter your choice: ")
 
@@ -159,6 +160,24 @@ elif choice == "7":
 
         for category, total in summary.items():
             print(f"{category}: ₹{total:.2f}")
+
+elif choice == "8":
+    search = input("Enter category to search: ").lower()
+
+    found = False
+
+    for expense in expenses:
+        if expense["category"].lower() == search:
+            print(
+                f"Date: {expense['date']} | "
+                f"Category: {expense['category']} | "
+                f"Amount: ₹{expense['amount']} | "
+                f"Description: {expense['description']}"
+            )
+            found = True
+
+    if not found:
+        print("No expenses found.")
 
     else:
         print("No expenses recorded.")
